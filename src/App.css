@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+:root {
+  --tw-bg-opacity: 1 !important;
+  color: rgb(0, 0, 0) !important;
+}
+#root {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center content horizontally */
+    justify-content: flex-start;
+    /* Align to top */
+    width: 100vw;
+    /* Full width */
+    height: 100vh;
+    /* Full viewport height */
+    background-color: rgb(226, 217, 178);
+}
+
+#root2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 375px;
+  height: 100vh;
+  /* Ensure full height */
+  overflow: hidden;
+  /* Allow content to scroll if needed */
+  position: relative;
+  scrollbar-width: none;
+}
+#root2::-webkit-scrollbar {
+  width: 0px;
+  /* Shrinks scrollbar width */
+  background: white;
+  /* Makes it blend with background */
+}
+#root2 div {
+  -webkit-overflow-scrolling: inherit;
+  scrollbar-width: inherit;
+}
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+@media (min-width: 760px){
+  #root2{
+    max-width : 500px;
+    width : 80% 
+  }
+}
+
+@media (min-width: 1024px){
+  #root2{
+    max-width :650px;
+    width : 80% 
+  }
+}
