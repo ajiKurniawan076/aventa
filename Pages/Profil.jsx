@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import iFoto from '../src/assets/iFoto.svg'
 import iEdit from '../src/assets/iEdit.svg'
 import iDataK from '../src/assets/iDataK.svg'
@@ -11,8 +11,32 @@ import iKebijakan from '../src/assets/iKebijakan.svg'
 import iPusat from '../src/assets/iPusat.svg'
 import Footer from './Component/Footer'
 import { FaWhatsapp } from 'react-icons/fa'
+import { AiOutlineCopy } from 'react-icons/ai'
+import axios from 'axios'
 
 const Profil = () => {
+    const [reseller,setreseller] = useState({})
+    useEffect(()=>{
+        const fetch = async() => {
+            await axios.get("http://localhost:5000/api/reseller").then(
+                response => {
+                    const cari = response.data.find(item=>item._id == localStorage.getItem("idreseller"))
+                    setreseller(cari)
+                    console.log(response)
+                }
+            )
+        }
+        fetch()
+    },[])
+    const handleCopy = async (e) => {
+        console.log(reseller)
+        e.preventDefault()
+        try {
+            await navigator.clipboard.writeText("https://aventa-ai.vercel.app/"+reseller?.ref);
+          } catch (err) {
+            console.error("Failed to copy:", err);
+          }
+    }
     return (
         <div className='flex flex-col bg-white w-full items-start text-[14px] md:text-[15px] text-[#454545] min-h-full overflow-y-scroll scrollbar-hide'>
             <div className='flex flex-col w-full px-[20px] mb-[90px]'>
@@ -42,6 +66,13 @@ const Profil = () => {
                         <div className='flex justify-between'>
                             <p>No. Telepon</p>
                             <p className='text-[#3B6790]'>089673166105</p>
+                        </div>
+                        <div className='flex flex-col justify-between'>
+                            <p>Link Referal</p>
+                            <div className='w-full flex'>
+                                <p className='text-[#3B6790] p-1.5 rounded-s-lg px-[10px] bg-gray-400/30 w-[90%]'>https://aventa-ai.vercel.app</p>
+                                <button onClick={handleCopy} className='w-[10%] bg-yellow-500/80 rounded-e-lg flex justify-center items-center'> <AiOutlineCopy/> </button>
+                            </div>
                         </div>
                     </div>
                 </div>
